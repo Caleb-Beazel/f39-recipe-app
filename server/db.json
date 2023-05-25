@@ -1,0 +1,38 @@
+[
+    {
+        "recipe ID" : 1,
+        "name" : "Spaghetti",
+        "instructions" : "Boil a pot of water. While water is heating up, cook ground beef. Once boiling, add spaghetti to the water stirring occasionally for 8 minutes. Strain the pasta from the water. Add sauce and meat. Serve",
+        "cook time" : 15,
+        "ingredients" : [{"name":"spaghetti pasta", "quantity":"6 oz"}, {"name":"spaghetti sauce", "quantity":"1/2 cup"}, {"name":"ground beef", "quantity":"1/2 lb"}]
+    },
+    {
+        "recipe ID" : 2,
+        "name" : "3-ingredient Mac & Cheese",
+        "instructions" : "1. In a large pot, bring the milk to a boil. \n 2. Add the pasta and stir constantly until the pasta is cooked, about 10 minutes. \n 3. Turn off the heat, then add the cheddar. \n 4. Stir until the cheese is melted and the pasta is evenly coated. \n 5. Enjoy!",
+        "cook time" : 10,
+        "ingredients" : [{"name":"elbow macaroni - dry", "quantity":"1 lb"}, {"name":"cheddar cheese - shredded", "quantity":"2 cups"}, {"name":"milk", "quantity":"5 cups"}]
+    },
+    {
+        "recipe ID" : 3,
+        "name" : "Pot Roast",
+        "instructions" : "Instructions \n \n 1. Season meat with salt and pepper, generously, on all sides. \n 2. Heat a large skillet over medium-high heat. Once the skillet it hot, add the oil. Once the oil is hot, add the meat. Sear on medium-high heat for a few minutes on each side, until all sides are well browned. \n 3. Lightly grease a slow cooker with non-stick cooking spray. Place meat in the bottom of the slow cooker. \n 4. Stir together the cream of soup mixture and dry onion soup seasoning in a bowl. Pour mixture over the meat in the slow cooker. \n 5. Cover and cook on LOW for 8-10 hours. \n 6. If adding veggies, add them 1.5 - 2 hours before the timer is up. \n\n\n\n Notes\n\n Instant Pot Pot Roast: Cut roast in half. Season as directed. Using the sauté setting, sear the roast in the Instant Pot with oil on all sides. Take meat out, deglaze the pot, add 1 cup of beef broth, and return the roast. Pour sauce mixture on top and cook on high pressure for 60-80 minutes (depending how big the roast is), or until tender. Allow a 15 minute natural pressure release. \n\n Oven Pot Roast: Season and sear roast as directed. Place roast in a large dutch oven pot with 2 1/2 cups beef broth. Add sauce mixture on top. Cover with lid and bake at 350 degrees F for 4 hours, or until meat is tender.\n\n Stove Top Pot Roast: (Only recommended if you don't have access to oven or slow cooker). Season and sear roast as directed. Deglaze pot and return roast with 2 1/2 cups of beef broth. Add cream of soup mixture on top, cover with lid, and cook pot roast at a simmer over medium low for about 4 hours, or until it shreds easily with a fork.",
+        "cook time" : 495,
+        "ingredients" : [{"name":"chuck roast", "quantity":"4-5 lbs"}, {"name":"onion soup mix", "quantity":"1 envelope"}, {"name":"cream of chicken soup", "quantity":"2 cans"},{"name":"carrots", "quantity":"n/a"},{"name":"potatoes - red or yellow", "quantity":"n/a"},{"name":"salt", "quantity":"n/a"},{"name":"pepper", "quantity":"n/a"}]
+    }, 
+    {
+        "recipe ID" : 4,
+        "name" : "Banana Bread",
+        "instructions" : "1. Preheat the oven to 350°F. Grease and flour a bread loaf pan (9.25 long x 5.25 wide x 2.75 deep). Lightly roast walnuts on a skillet, continuously stirring so they won't burn. Coarsely chop and cool to room temperature.  \n 2. In a mixing bowl, cream together 8 Tbsp softened butter and 3/4 cup sugar (or honey if using honey). \n 3. Mash bananas with a fork until the consistency of chunky applesauce and add them to the batter along with 2 eggs, mixing until blended.  \n 4. In a separate bowl, whisk together: 1 1/2 cups of flour, 1 tsp of baking soda and 1/2 tsp of salt then add to batter. \n 5. Add 1/2 tsp of vanilla extract and mix in chopped walnuts and raisins. Pour into prepared loaf pan. Bake at 350˚F for 55-60 min or until a toothpick inserted into the center comes out clean. Let banana bread rest for 10 min before transferring to a wire rack to cool.",
+        "cook time" : 80,
+        "ingredients" : [{"name":"banana - very ripe, medium/large", "quantity":"3 count"}, {"name":"butter - unsalted, room temperature", "quantity":"1/2 cup"}, {"name":"sugar - granulated", "quantity":"3/4 cup"}, {"name":"baking soda", "quantity":"1 tsp"}, {"name":"salt", "quantity":"1 tsp"}, {"name":"vanilla extract", "quantity":"1/2 tsp"}, {"name":"walnuts", "quantity":"1 cup"}, {"name":"raisins", "quantity":"1/2 cup"}]
+    },
+    {
+        "recipe ID" : 5,
+        "name" : "3-ingredient Mac & Cheese",
+        "instructions" : "1. In a saucepan, bring water and salsa to a boil. \n 2. Stir in rice. Remove from the heat; cover and let stand for 5 minutes. \n 3. Turn off the heat, then add the cheddar. \n 4. Stir in cheese; cover and let stand for 30 seconds or until cheese is melted.",
+        "cook time" : 15,
+        "ingredients" : [{"name":"rice - instant", "quantity":"2 cups"}, {"name":"Colby-Monterey Jack cheese - shredded", "quantity":"1 - 1 1/2 cups"}, {"name":"salsa - chunky", "quantity":"1 1/2 cups"}, {"name":"water", "quantity":"1 1/2 cups"}]
+    }
+
+]

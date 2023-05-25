@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <form id="new-recipe">
+        <h2>Add a New Recipe:</h2>
+        <h3>Recipe Name:</h3>
+        <input placeholder="Recipe Name" id="new-recipe-name"/>
+        <h3>Cooktime</h3>
+        <input placeholder="in minutes" id="new-recipe-cooktime"/>
+        <h3>Instructions (In Steps)</h3>
+        <div id="new-instructions">
+            <textarea placeholder="Step 1..." class="new-recipe-step"></textarea>
+        </div>
+        <button id="another-step">Add Another Step</button>
+        <h3>Ingredients</h3>
+        <div id="new-ingredients">
+            <label for="new-ingredient-name">Ingredient Name:
+                <input placeholder="ingredient name" class="new-ingredient-name"/>
+            </label>
+            <label for="new-ingredient-quantity">Quantity:
+                <input placeholder="numerical quantity" class="new-ingredient-quantity"/>
+            </label>
+            <label for="new-ingredient-units">Unit of Measurement:
+                <input placeholder="unit of measurement" class="new-ingredient-units"/>
+            </label>
+            <label for="new-ingredient-descriptor">Descriptor:
+                <input placeholder="i.e. chopped, dry, shredded..." class="new-ingredient-descriptor"/>
+            </label>
+
+        </div>
+        <button id="another-ingredient">Add Another Ingredient</button>
+
+        <h3>Image</h3>
+        <input placeholder="Add an image link" id="new-recipe-image"/>
+        <br>
+        <br>
+        <button type="submit" id="submit-recipe">Submit</button>
+
+    </form>
+    
+    <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
