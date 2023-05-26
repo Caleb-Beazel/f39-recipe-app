@@ -2,6 +2,7 @@ const newInstructStep = document.getElementById('new-instructions')
 const addStepButton = document.getElementById('another-step')
 const newIngredients = document.getElementById('new-ingredients')
 const anotherIngredButton = document.getElementById('another-ingredient')
+const newRecipeForm = document.getElementById('new-recipe')
 const submitRecipe = document.getElementById('submit-recipe')
 
 anotherIngredButton.addEventListener('click', (e) => {
@@ -47,3 +48,41 @@ addStepButton.addEventListener('click', (e) => {
     newInstructStep.appendChild(newStep)
 })
 
+newRecipeForm.addEventListener('submit',(e) => {
+    e.preventDefault()
+
+    let newRecipe = {}
+
+    newRecipe.recipeName = document.querySelector('#new-recipe-name').value
+    newRecipe.cookTime = document.querySelector('#new-recipe-cooktime').value
+    newRecipe.instructions = []
+    newRecipe.imageLink = document.querySelector('#new-recipe-image').value
+    newRecipe.ingredients = []
+
+    let tempInstructs = document.querySelectorAll('.new-recipe-step')
+
+    for (i = 0; i < tempInstructs.length; i++){
+        let stepFormat = `Step ${i+1}: ${tempInstructs[i].value}`
+        newRecipe.instructions.push(stepFormat) 
+    }
+    newRecipe.instructions = newRecipe.instructions.join('\n\n')
+
+
+    let tempIngredName = document.querySelectorAll('.new-ingredient-name')
+    let tempIngredQuantity = document.querySelectorAll('.new-ingredient-quantity')
+    let tempIngredUnit = document.querySelectorAll('.new-ingredient-units')
+    let tempIngredDescriptor = document.querySelectorAll('.new-ingredient-descriptor')
+    
+    for(i = 0; i < tempIngredName.length; i++){
+        newRecipe.ingredients.push({
+            ingredientName: tempIngredName[i].value,
+            quantity: tempIngredQuantity[i].value,
+            unit: tempIngredUnit[i].value,
+            descriptor: tempIngredDescriptor[i].value
+        })
+    }
+    console.log(newRecipe)
+    console.log(newRecipe.instructions)
+
+    
+})
