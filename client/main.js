@@ -1,3 +1,5 @@
+
+
 const newInstructStep = document.getElementById('new-instructions')
 const addStepButton = document.getElementById('another-step')
 const newIngredients = document.getElementById('new-ingredients')
@@ -83,6 +85,11 @@ newRecipeForm.addEventListener('submit',(e) => {
     }
     console.log(newRecipe)
     console.log(newRecipe.instructions)
-
     
+    axios.post('http://localhost:7766/api/recipes', newRecipe)
+    .then(res => {
+        let submitBox = document.getElementById('submitted-text')
+        submitBox.innerHTML = "Your recipe has been added!"
+    })
+    .catch(err => console.log(err))
 })
