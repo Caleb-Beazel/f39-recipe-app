@@ -8,11 +8,11 @@ const app = express()
 app.use(express.json())
 app.use(cors())
 
-const { newRecipe, buildTables } = require('./controller')
+const { addRecipe, buildTables } = require('./controller')
 
 //app.post('/build-tables', buildTables)
 
-app.post('/api/recipes', newRecipe)
+app.post('/api/recipes', addRecipe)
 
 
 
