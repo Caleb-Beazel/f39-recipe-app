@@ -38,12 +38,12 @@ function generateUniqueKey(randomize) {
 module.exports = {
     buildTables: (req, res) => {
         sequelize.query(`
+        drop table if exists ingredient_to_recipe;
         drop table if exists recipes;
         drop table if exists ingredients;
-        drop table if exists ingredient_to_recipe;
 
         CREATE TABLE recipes (
-            recipe_id PRIMARY KEY UNIQUE NOT NULL,
+            recipe_id VARCHAR PRIMARY KEY UNIQUE NOT NULL,
             recipe_name VARCHAR (150) NOT NULL,
             cook_time INT NOT NULL,
             instructions VARCHAR NOT NULL,
@@ -51,13 +51,13 @@ module.exports = {
         );
 
         CREATE TABLE ingredients (
-            ingredient_id PRIMARY KEY UNIQUE NOT NULL,
+            ingredient_id VARCHAR PRIMARY KEY UNIQUE NOT NULL,
             ingredient_name VARCHAR (150) UNIQUE NOT NULL,
             in_pantry BOOLEAN
         );
 
         CREATE TABLE ingredient_to_recipe (
-            ing_to_recipe_id PRIMARY KEY UNIQUE NOT NULL,
+            ing_to_recipe_id VARCHAR PRIMARY KEY UNIQUE NOT NULL,
             recipe_id VARCHAR REFERENCES recipes(recipe_id) NOT NULL,
             ingredient_id VARCHAR REFERENCES ingredients(ingredient_id) NOT NULL,
             quantity DECIMAL NOT NULL,
@@ -78,21 +78,30 @@ module.exports = {
             recipes (recipe_id, recipe_name, cook_time, instructions, image_link)
         VALUES
             ('${hashRecipeID}' ,'${recipeName}', ${cookTime},'${instructions}', '${imageLink}');
-        `)
+        `).then(() => {
+            console.log('recipe added')
+            res.sendStatus(200)
+        }).catch(err => console.log(err))
 
-        for (i in ingredients){
-            const ingredientName = i.ingredientName.value
-            const quantity = i.quantity.value
-            const unit = i.unit.value
-            const descriptor = i.descriptor.value
+        for (i of ingredients){
+            console.log(i)
+            console.dir(i)
+            const ingredientName = i.ingredientName
+            const quantity = i.quantity
+            const unit = i.unit
+            const descriptor = i.descriptor
             let hashIngredID = generateUniqueKey(7)
             let hashIngToRecID = generateUniqueKey(8)
 
+            
             if(sequelize.query(`
             SELECT EXISTS(SELECT * FROM ingredients
                 WHERE ingredient_name = '${ingredientName}')
             `)){
-                continue
+                hashIngredID = sequelize.query(`
+                    SELECT ingredient_id FROM ingredients
+                    WHERE ingredient_name = '${ingredientName}'
+                `)
             } else { sequelize.query(`
                 INSERT INTO
                     ingredients (ingredient_id, ingredient_name)
@@ -100,12 +109,16 @@ module.exports = {
                     ('${hashIngredID}','${ingredientName}')
                 `) 
             }
+
             sequelize.query(`
                 INSERT INTO
                     ingredient_to_recipe (ing_to_recipe_id, recipe_id, ingredient_id, quantity, unit, descriptor)
                 VALUES
                     ('${hashIngToRecID}', '${hashRecipeID}', '${hashIngredID}', ${quantity}, '${unit}', '${descriptor}')
-            `)
+            `).then(() => {
+                console.log('ingredient to recipe added')
+                res.sendStatus(200)
+            }).catch(err => console.log(err))
 
         }
         

@@ -10,9 +10,9 @@ app.use(cors())
 
 const { addRecipe, buildTables } = require('./controller')
 
-//app.post('/build-tables', buildTables)
+// app.post('/build-tables', buildTables)
 
-app.post('/api/recipes', addRecipe)
+app.post('/recipes', addRecipe)
 
 
 

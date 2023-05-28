@@ -86,7 +86,7 @@ newRecipeForm.addEventListener('submit',(e) => {
     console.log(newRecipe)
     console.log(newRecipe.instructions)
     
-    axios.post('http://localhost:7766/api/recipes', newRecipe)
+    axios.post('http://localhost:7766/recipes', newRecipe)
     .then(res => {
         let submitBox = document.getElementById('submitted-text')
         submitBox.innerHTML = "Your recipe has been added!"
