@@ -24,7 +24,7 @@ function generateRandomString(length) {
     return result;
   }
   
-  // Function to generate a unique key
+  // Function to generate a unique key. "randomize" is set to some integer value.
 
 function generateUniqueKey(randomize) {
     const timestamp = new Date().getTime().toString();
@@ -70,10 +70,11 @@ module.exports = {
         }).catch(err => console.log('error creating tables', err))
     },
 
-    addRecipe: (req, res) => {
+    addRecipe: async (req, res) => {
         let { recipeName, cookTime, instructions, imageLink, ingredients } = req.body
         let hashRecipeID = generateUniqueKey(13)
-        sequelize.query(`
+        
+        await sequelize.query(`
         INSERT INTO 
             recipes (recipe_id, recipe_name, cook_time, instructions, image_link)
         VALUES
@@ -83,44 +84,94 @@ module.exports = {
             res.sendStatus(200)
         }).catch(err => console.log(err))
 
-        for (i of ingredients){
-            console.log(i)
-            console.dir(i)
-            const ingredientName = i.ingredientName
-            const quantity = i.quantity
-            const unit = i.unit
-            const descriptor = i.descriptor
-            let hashIngredID = generateUniqueKey(7)
-            let hashIngToRecID = generateUniqueKey(8)
-
-            
-            if(sequelize.query(`
-            SELECT EXISTS(SELECT * FROM ingredients
-                WHERE ingredient_name = '${ingredientName}')
-            `)){
-                hashIngredID = sequelize.query(`
-                    SELECT ingredient_id FROM ingredients
-                    WHERE ingredient_name = '${ingredientName}'
+        try {await Promise.all(
+            ingredients.map(async i => {
+                const {ingredientName, quantity, unit, descriptor} = i
+                let hashIngredID = generateUniqueKey(7)
+                let hashIngToRecID = generateUniqueKey(8)
+                    
+                const result = await sequelize.query(`
+                SELECT ingredient_id FROM ingredients
+                WHERE ingredient_name = '${ingredientName}'
                 `)
-            } else { sequelize.query(`
-                INSERT INTO
-                    ingredients (ingredient_id, ingredient_name)
-                VALUES
-                    ('${hashIngredID}','${ingredientName}')
-                `) 
-            }
 
-            sequelize.query(`
+                const dbIngredientID = result?.[0]?.[0]?.ingredient_id
+                // console.dir({dbIngredientID})
+
+                if (dbIngredientID){
+                    hashIngredID = dbIngredientID
+                } else {
+                    await sequelize.query(`
+                    INSERT INTO
+                        ingredients (ingredient_id, ingredient_name)
+                    VALUES
+                        ('${hashIngredID}','${ingredientName}')
+                    `) 
+                }
+                    
+                await sequelize.query(`
                 INSERT INTO
                     ingredient_to_recipe (ing_to_recipe_id, recipe_id, ingredient_id, quantity, unit, descriptor)
                 VALUES
                     ('${hashIngToRecID}', '${hashRecipeID}', '${hashIngredID}', ${quantity}, '${unit}', '${descriptor}')
-            `).then(() => {
-                console.log('ingredient to recipe added')
-                res.sendStatus(200)
-            }).catch(err => console.log(err))
+                `).catch(err => console.log(err))               
+        })
+    )
+    res.sendStatus
 
-        }
-        
+    }  catch (e) {
+        console.error(e)
+    }
+    },
+
+    addIngredients: async (req, res) => {
+        try {await Promise.all(
+            ingredients.map(async i => {
+                const {ingredientName} = i
+                let hashIngredID = generateUniqueKey(7)
+                    
+                const result = await sequelize.query(`
+                SELECT ingredient_id FROM ingredients
+                WHERE ingredient_name = '${ingredientName}'
+                `)
+
+                const dbIngredientID = result?.[0]?.[0]?.ingredient_id
+                // console.dir({dbIngredientID})
+
+                if (dbIngredientID){
+                    hashIngredID = dbIngredientID
+                } else {
+                    await sequelize.query(`
+                    INSERT INTO
+                        ingredients (ingredient_id, ingredient_name)
+                    VALUES
+                        ('${hashIngredID}','${ingredientName}')
+                    `) 
+                }               
+        })
+    )
+    res.sendStatus
+
+    }  catch (e) {
+        console.error(e)
+    }
     }
 }
+
+
+
+        
+
+// const test = () => {
+//     ['foo', 'Flour'].forEach(async item => {
+//         const result = await sequelize.query(`
+//             SELECT ingredient_id FROM ingredients
+//             WHERE ingredient_name = '${item}'
+//         `)
+        // console.dir(result)
+        // console.dir(result?.[0]?.[0]?.ingredient_id)
+//     })
+// }
+
+// test()
+

@@ -77,10 +77,10 @@ newRecipeForm.addEventListener('submit',(e) => {
     
     for(i = 0; i < tempIngredName.length; i++){
         newRecipe.ingredients.push({
-            ingredientName: tempIngredName[i].value,
+            ingredientName: tempIngredName[i].value.toLowerCase(),
             quantity: tempIngredQuantity[i].value,
-            unit: tempIngredUnit[i].value,
-            descriptor: tempIngredDescriptor[i].value
+            unit: tempIngredUnit[i].value.toLowerCase(),
+            descriptor: tempIngredDescriptor[i].value.toLowerCase()
         })
     }
     console.log(newRecipe)
