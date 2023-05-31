@@ -9,10 +9,11 @@ const sequelize = new Sequelize(CONNECTION_STRING, {
         ssl: {
             rejectUnauthorized: false
         }
-    }
+    },
+    logging: false
 })
 
-//generates unique string for hashing
+//Generates unique string for hashing.
 
 function generateRandomString(length) {
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -96,7 +97,6 @@ module.exports = {
                 `)
 
                 const dbIngredientID = result?.[0]?.[0]?.ingredient_id
-                // console.dir({dbIngredientID})
 
                 if (dbIngredientID){
                     hashIngredID = dbIngredientID
@@ -124,7 +124,54 @@ module.exports = {
     }
     },
 
+    getRecipes: (req, res) => {
+        // let allRecipes = []
+        // sequelize.query(`
+        //     SELECT recipe_id FROM recipes
+        // `).then((dbRes) => {
+        //     for (i in dbRes[0]){
+        //         let id = dbRes[0][i].recipe_id
+        //         // console.dir(id)
+        //         sequelize.query(`
+        //             SELECT 
+        //             ingredient_to_recipe.recipe_id,
+        //             quantity,
+        //             unit,
+        //             descriptor,
+        //             ingredient_name,
+        //             in_pantry,
+        //             recipe_name,
+        //             cook_time,
+        //             instructions,
+        //             image_link
+        //             FROM ingredient_to_recipe
+        //             JOIN ingredients ON ingredients.ingredient_id = ingredient_to_recipe.ingredient_id
+        //             JOIN recipes ON recipes.recipe_id = ingredient_to_recipe.recipe_id
+        //             WHERE ingredient_to_recipe.recipe_id = '${id}'
+        //         `)
+        //         .then(dbRes2 => {
+        //             console.log(dbRes2[0])
+        //             allRecipes.push(dbRes2[0])
+        //         })
+        //     }
+        //     // console.dir(allRecipes)
+        //     res.status(200).send(allRecipes)
+        // }) 
+        sequelize.query(`
+        SELECT *
+        FROM recipes
+        JOIN ingredient_to_recipe ON recipes.recipe_id = ingredient_to_recipe.recipe_id
+        JOIN ingredients ON ingredients.ingredient_id = ingredient_to_recipe.ingredient_id
+        ORDER BY recipes.recipe_name;
+        `).then((dbRes) => {
+            res.status(200).send(dbRes[0])
+         })
+        .catch(err => console.log(err))
+    },
+
+    //addIngredients has no end points or corresponding HTML.
     addIngredients: async (req, res) => {
+        const {ingredients} = req.body
         try {await Promise.all(
             ingredients.map(async i => {
                 const {ingredientName} = i

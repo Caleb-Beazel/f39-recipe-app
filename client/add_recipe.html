@@ -4,11 +4,18 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="reset.css">
-    <link rel="stylesheet" href="styles.css">
+    <title>Add a Recipe</title>
+    <link rel="stylesheet" href="styles/reset.css">
+    <link rel="stylesheet" href="styles/add_recipe.css">
 </head>
 <body>
+    <header>
+        <nav>
+            <a href="./index.html">Recipes</a>
+            <a href="./add_recipe.html">Add a Recipe</a>
+            <a href="./inventory.html">Ingredients</a>
+        </nav>
+    </header>
     <form id="new-recipe">
         <h2>Add a New Recipe:</h2>
         <h3>Recipe Name:</h3>
@@ -26,7 +33,7 @@
                 <input placeholder="ingredient name" class="new-ingredient-name"/>
             </label>
             <label for="new-ingredient-quantity">Quantity:
-                <input placeholder="numerical quantity" class="new-ingredient-quantity"/>
+                <input placeholder="in decimals" class="new-ingredient-quantity"/>
             </label>
             <label for="new-ingredient-units">Unit of Measurement:
                 <input placeholder="unit of measurement" class="new-ingredient-units"/>
@@ -48,6 +55,6 @@
     </form>
     
     <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
-    <script src="main.js"></script>
+    <script src="scripts/add_recipe.js"></script>
 </body>
 </html>

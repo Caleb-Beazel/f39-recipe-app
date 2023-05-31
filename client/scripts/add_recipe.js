@@ -1,5 +1,3 @@
-
-
 const newInstructStep = document.getElementById('new-instructions')
 const addStepButton = document.getElementById('another-step')
 const newIngredients = document.getElementById('new-ingredients')
@@ -7,6 +5,9 @@ const anotherIngredButton = document.getElementById('another-ingredient')
 const newRecipeForm = document.getElementById('new-recipe')
 const submitRecipe = document.getElementById('submit-recipe')
 
+
+
+//Adds an additional field for another step of the recipe
 anotherIngredButton.addEventListener('click', (e) => {
     e.preventDefault()
 
@@ -41,6 +42,7 @@ anotherIngredButton.addEventListener('click', (e) => {
 
 })
 
+//Adds additional fields for an additional ingredient
 addStepButton.addEventListener('click', (e) => {
     e.preventDefault()
 
@@ -50,6 +52,7 @@ addStepButton.addEventListener('click', (e) => {
     newInstructStep.appendChild(newStep)
 })
 
+// Recipe Post Function
 newRecipeForm.addEventListener('submit',(e) => {
     e.preventDefault()
 
@@ -86,7 +89,7 @@ newRecipeForm.addEventListener('submit',(e) => {
     console.log(newRecipe)
     console.log(newRecipe.instructions)
     
-    axios.post('http://localhost:7766/recipes', newRecipe)
+    axios.post('/recipes', newRecipe)
     .then(res => {
         let submitBox = document.getElementById('submitted-text')
         submitBox.innerHTML = "Your recipe has been added!"
