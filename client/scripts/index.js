@@ -52,20 +52,29 @@ function createRecipeCard(recipes) {
             recipeCard.classList.add('recipe-card')
 
             
-            const recipeNameEl = document.createElement('h3')
+            const recipeNameEl = document.createElement('h2')
+            const instructionsTitle = document.createElement('h3')
             const instructionsEl = document.createElement('p')
             const cookTimeEl = document.createElement('p')
             const image = document.createElement('img')
             const ingDiv = document.createElement('div')
+            const ingH3 = document.createElement('h3')
             const deleteButton = document.createElement('button')
 
             recipeNameEl.textContent = recipeName
+            recipeNameEl.classList.add('recipe-name')
+            instructionsTitle.textContent = 'Instructions'
             instructionsEl.textContent = instructions
+            instructionsEl.classList.add('instructions')
             cookTimeEl.textContent = (`Total Time: ${cookTime} minutes`)
-            ingDiv.textContent = 'Ingredients'
+            cookTimeEl.classList.add('cook-time')
+            ingDiv.appendChild(ingH3)
+            ingH3.textContent = 'Ingredients'
+            ingDiv.classList.add('ingredient-box')
             image.src = imageLink
             image.classList.add('recipe-images')
             deleteButton.textContent = 'Delete Recipe'
+            deleteButton.classList.add('delete-button')
             deleteButton.onclick = () => {
                 axios.delete(`/recipes/${recipeId}`)
                 .then(() => {
@@ -75,8 +84,8 @@ function createRecipeCard(recipes) {
                 .catch(err => console.log(err))
             }
 
-            recipeCard.appendChild(image)
             recipeCard.appendChild(recipeNameEl)
+            recipeCard.appendChild(image)
             recipeCard.appendChild(cookTimeEl)
             recipeCard.appendChild(ingDiv)
             
@@ -85,9 +94,11 @@ function createRecipeCard(recipes) {
 
                 const ingredEl = document.createElement('p')
                 ingredEl.textContent = (`- ${quantity} ${unit} ${ingredientName} - ${descriptor}`)
+                ingredEl.classList.add('ingredients')
                 ingDiv.appendChild(ingredEl)
             }
             
+            recipeCard.appendChild(instructionsTitle)
             recipeCard.appendChild(instructionsEl)
             recipeCard.appendChild(deleteButton)
 

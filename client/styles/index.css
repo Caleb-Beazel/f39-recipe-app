@@ -1,14 +1,79 @@
+h1 {
+    font-size: 50px;
+}
+
+h2 {
+
+}
+
+h3{
+    margin: 10px;
+}
+header{
+    height: 40px;
+    width: 100%;
+    background-color: grey;
+    position: static;
+}
+
+nav{
+    height: 100%;
+    width: 100%;
+}
+nav > * {
+    height: 100%;
+    width: 100px;
+}
+
+nav > * > a {
+    text-decoration: none;
+    color: black;
+}
+
+
 #recipes-container{
     display: flex;
-}
-.recipe-images{
-    width: auto px;
-    height: 100 px;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    background-color: rgb(255, 255, 255);
+    padding: 20px;
+
 }
 
 .recipe-card {
     display: flex;
-    flex-direction: row;
-    height: 400 px;
-    width: 500 px;
+    flex-direction: column;
+    width: 500px;
+    margin-top: 40px;
+    border: solid black 1px;
+    padding: 25px;
+}
+.recipe-name{
+    padding-bottom: 12px;
+}
+
+.recipe-images{
+    top: 0;
+    right: 0;
+    width: 100px;
+    object-fit: cover;
+    justify-items: right;
+
+}
+
+.cook-time{
+    padding-top: 8px;
+}
+
+.ingredient-box{
+    
+}
+
+.instructions{
+
+}
+
+.delete-button{
+    margin-top: 15px;
 }
