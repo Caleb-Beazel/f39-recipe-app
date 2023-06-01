@@ -3,6 +3,7 @@ const recipesContainer = document.getElementById('recipes-container')
 /*Gets all recipes in the database. Should at some point return
 data according to available ingredients */
 const getRecipes = () => {
+
     axios.get('/recipes')
     .then(res => {   
         createRecipeCard(res.data)
@@ -10,8 +11,8 @@ const getRecipes = () => {
     .catch(err => console.log(err))
 }
 
-function createRecipeCard(recipes) { 
-    // console.dir(recipes)
+function createRecipeCard(recipes) {
+
     const mapOfRecipes = recipes.reduce((acc, curr) => {
         const recipeId = curr.recipe_id
 
@@ -64,6 +65,14 @@ function createRecipeCard(recipes) {
             ingDiv.textContent = 'Ingredients'
             image.src = imageLink
             deleteButton.textContent = 'Delete Recipe'
+            deleteButton.onclick = () => {
+                axios.delete(`/recipes/${recipeId}`)
+                .then(() => {
+                    getRecipes()
+                    recipesContainer.innerHTML = ''
+                })
+                .catch(err => console.log(err))
+            }
 
             recipeCard.appendChild(image)
             recipeCard.appendChild(recipeNameEl)
@@ -85,6 +94,5 @@ function createRecipeCard(recipes) {
 
         }
 }
-
 
 getRecipes()

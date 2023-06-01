@@ -125,38 +125,6 @@ module.exports = {
     },
 
     getRecipes: (req, res) => {
-        // let allRecipes = []
-        // sequelize.query(`
-        //     SELECT recipe_id FROM recipes
-        // `).then((dbRes) => {
-        //     for (i in dbRes[0]){
-        //         let id = dbRes[0][i].recipe_id
-        //         // console.dir(id)
-        //         sequelize.query(`
-        //             SELECT 
-        //             ingredient_to_recipe.recipe_id,
-        //             quantity,
-        //             unit,
-        //             descriptor,
-        //             ingredient_name,
-        //             in_pantry,
-        //             recipe_name,
-        //             cook_time,
-        //             instructions,
-        //             image_link
-        //             FROM ingredient_to_recipe
-        //             JOIN ingredients ON ingredients.ingredient_id = ingredient_to_recipe.ingredient_id
-        //             JOIN recipes ON recipes.recipe_id = ingredient_to_recipe.recipe_id
-        //             WHERE ingredient_to_recipe.recipe_id = '${id}'
-        //         `)
-        //         .then(dbRes2 => {
-        //             console.log(dbRes2[0])
-        //             allRecipes.push(dbRes2[0])
-        //         })
-        //     }
-        //     // console.dir(allRecipes)
-        //     res.status(200).send(allRecipes)
-        // }) 
         sequelize.query(`
         SELECT *
         FROM recipes
@@ -169,6 +137,24 @@ module.exports = {
         .catch(err => console.log(err))
     },
 
+    deleteRecipe: (req, res) => {
+        
+        const {id} = req.params
+
+        sequelize.query(`
+            DELETE
+            FROM ingredient_to_recipe
+            WHERE recipe_id = '${id}';
+
+            DELETE
+            FROM recipes
+            WHERE recipe_id = '${id}';
+        `).then((dbRes) => {
+            res.sendStatus(200)
+         })
+        .catch(err => console.log(err))
+
+    },
     //addIngredients has no end points or corresponding HTML.
     addIngredients: async (req, res) => {
         const {ingredients} = req.body
