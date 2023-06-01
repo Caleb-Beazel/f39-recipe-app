@@ -4,22 +4,24 @@ const recipesContainer = document.getElementById('recipes-container')
 data according to available ingredients */
 const getRecipes = () => {
     axios.get('/recipes')
-    .then(res => {
-        // console.log(res.data)
+    .then(res => {   
         createRecipeCard(res.data)
     })
+    .catch(err => console.log(err))
 }
 
-function createRecipeCard(recipes) {
-    
+function createRecipeCard(recipes) { 
+    // console.dir(recipes)
     const mapOfRecipes = recipes.reduce((acc, curr) => {
         const recipeId = curr.recipe_id
-        if (!acc[recipeId] && (!null || !undefined)){
+
+        if (!acc[recipeId]){
             acc[recipeId] = {
                 recipeId: recipeId,
                 recipeName: curr.recipe_name,
                 cookTime: curr.cook_time,
                 instructions: curr.instructions,
+                imageLink: curr.image_link,
                 ingredients: [{
                         ingredientName: curr.ingredient_name,
                         quantity: curr.quantity,
@@ -27,7 +29,7 @@ function createRecipeCard(recipes) {
                         descriptor: curr.descriptor
                     }]
             }
-        } else if (acc[recipeId] && (!null || !undefined) ) {
+        } else if (acc[recipeId]) {
             acc[recipeId].ingredients.push({
                 ingredientName: curr.ingredient_name,
                 quantity: curr.quantity,
@@ -35,30 +37,54 @@ function createRecipeCard(recipes) {
                 descriptor: curr.descriptor
             })
         }
+        return acc
     }, {})
 
     const recipeArr = Object.keys(mapOfRecipes).map(key => mapOfRecipes[key])
 
-    console.dir(recipeArr)
         
-        // const recipeCard = document.createElement('div')
-        // const { recipeName, } = recipe
-        // recipeCard.classList.add('recipe-card') 
-        
-        // recipesContainer.appendChild(recipeCard)
+        for (let recipe of recipeArr){
+            
+            const { recipeId, recipeName, imageLink, instructions, cookTime, ingredients } = recipe
+            
+            const recipeCard = document.createElement('div')
+            recipeCard.classList.add('recipe-card')
 
+            
+            const recipeNameEl = document.createElement('h3')
+            const instructionsEl = document.createElement('p')
+            const cookTimeEl = document.createElement('p')
+            const image = document.createElement('img')
+            const ingDiv = document.createElement('div')
+            const deleteButton = document.createElement('button')
 
-    // recipeCard.innerHTML = `<img alt='recipe img' src=${movie.imageURL} class="recipe-img"/>
-    // <p class="recipe-name">${movie.title}</p>
-    // <div class="btns-container">
-    //     <button onclick="updateMovie(${movie.id}, 'minus')">-</button>
-    //     <p class="movie-rating">${movie.rating} stars</p>
-    //     <button onclick="updateMovie(${movie.id}, 'plus')">+</button>
-    // </div>
-    // <button onclick="deleteMovie(${movie.id})">delete</button>
-    // `
+            recipeNameEl.textContent = recipeName
+            instructionsEl.textContent = instructions
+            cookTimeEl.textContent = (`Total Time: ${cookTime} minutes`)
+            ingDiv.textContent = 'Ingredients'
+            image.src = imageLink
+            deleteButton.textContent = 'Delete Recipe'
 
+            recipeCard.appendChild(image)
+            recipeCard.appendChild(recipeNameEl)
+            recipeCard.appendChild(cookTimeEl)
+            recipeCard.appendChild(ingDiv)
+            
+            for (i of ingredients){
+                const { ingredientName, quantity, unit, descriptor } = i
 
+                const ingredEl = document.createElement('p')
+                ingredEl.textContent = (`- ${quantity} ${unit} ${ingredientName} - ${descriptor}`)
+                ingDiv.appendChild(ingredEl)
+            }
+            
+            recipeCard.appendChild(instructionsEl)
+            recipeCard.appendChild(deleteButton)
+
+            recipesContainer.appendChild(recipeCard)
+
+        }
 }
+
 
 getRecipes()
