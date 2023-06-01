@@ -13,7 +13,7 @@ app.use(express.static(path.join(process.cwd() + "/client")))
 const { buildTables, addRecipe, getRecipes, deleteRecipe } = require('./controller')
 
 // USED TO DELETE AND RECREATE TABLES
-// app.post('/build-tables', buildTables)
+app.post('/build-tables', buildTables)
 
 app.get('/recipes', getRecipes)
 app.post('/recipes', addRecipe)

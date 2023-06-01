@@ -1,60 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Add a Recipe</title>
-    <link rel="stylesheet" href="styles/reset.css">
-    <link rel="stylesheet" href="styles/add_recipe.css">
-</head>
-<body>
+    <link rel="stylesheet" href="styles/reset.css" />
+    <link rel="stylesheet" href="styles/add_recipe.css" />
+  </head>
+  <body>
     <header>
-        <nav>
-            <a href="./index.html">Recipes</a>
-            <a href="./add_recipe.html">Add a Recipe</a>
-            <a href="./inventory.html">Ingredients</a>
-        </nav>
+      <nav>
+        <button class="nav-buttons">
+          <a href="./index.html">Recipes</a>
+        </button>
+        <button class="nav-buttons">
+          <a href="./add_recipe.html">Add a Recipe</a>
+        </button>
+        <!-- <a href="./inventory.html">Ingredients</a> -->
+      </nav>
     </header>
-    <form id="new-recipe">
+    <section>
+      <form id="new-recipe">
         <h2>Add a New Recipe:</h2>
         <h3>Recipe Name:</h3>
-        <input placeholder="Recipe Name" id="new-recipe-name"/>
+        <input placeholder="Recipe Name" id="new-recipe-name" />
         <h3>Cooktime</h3>
-        <input placeholder="in minutes" id="new-recipe-cooktime"/>
+        <input placeholder="in minutes" id="new-recipe-cooktime" />
         <h3>Instructions (In Steps)</h3>
         <div id="new-instructions">
-            <textarea placeholder="Step 1..." class="new-recipe-step"></textarea>
+          <textarea placeholder="Step 1..." class="new-recipe-step"></textarea>
         </div>
         <button id="another-step">Add Another Step</button>
         <h3>Ingredients</h3>
         <div id="new-ingredients">
-            <label for="new-ingredient-name">Ingredient Name:
-                <input placeholder="ingredient name" class="new-ingredient-name"/>
-            </label>
-            <label for="new-ingredient-quantity">Quantity:
-                <input placeholder="in decimals" class="new-ingredient-quantity"/>
-            </label>
-            <label for="new-ingredient-units">Unit of Measurement:
-                <input placeholder="unit of measurement" class="new-ingredient-units"/>
-            </label>
-            <label for="new-ingredient-descriptor">Descriptor:
-                <input placeholder="i.e. chopped, dry, shredded..." class="new-ingredient-descriptor"/>
-            </label>
-
+          <label for="new-ingredient-name"
+            >Ingredient Name:
+            <input placeholder="ingredient name" class="new-ingredient-name" />
+          </label>
+          <label for="new-ingredient-quantity"
+            >Quantity:
+            <input placeholder="in decimals" class="new-ingredient-quantity" />
+          </label>
+          <label for="new-ingredient-units"
+            >Unit of Measurement:
+            <input
+              placeholder="unit of measurement"
+              class="new-ingredient-units"
+            />
+          </label>
+          <label for="new-ingredient-descriptor"
+            >Descriptor:
+            <input
+              placeholder="i.e. chopped, dry, shredded..."
+              class="new-ingredient-descriptor"
+            />
+          </label>
         </div>
         <button id="another-ingredient">Add Another Ingredient</button>
 
         <h3>Image</h3>
-        <input placeholder="Add an image link" id="new-recipe-image"/>
-        <br>
-        <br>
+        <input placeholder="Add an image link" id="new-recipe-image" />
+        <br />
+        <br />
         <button type="submit" id="submit-recipe">Submit</button>
         <footer id="submitted-text"></footer>
-
-    </form>
-    
+      </form>
+    </section>
     <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
     <script src="scripts/add_recipe.js"></script>
-</body>
+  </body>
 </html>

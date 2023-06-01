@@ -64,6 +64,7 @@ function createRecipeCard(recipes) {
             cookTimeEl.textContent = (`Total Time: ${cookTime} minutes`)
             ingDiv.textContent = 'Ingredients'
             image.src = imageLink
+            image.classList.add('recipe-images')
             deleteButton.textContent = 'Delete Recipe'
             deleteButton.onclick = () => {
                 axios.delete(`/recipes/${recipeId}`)

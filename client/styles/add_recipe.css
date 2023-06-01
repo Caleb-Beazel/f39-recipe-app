@@ -1,0 +1,42 @@
+*{
+    ;
+}
+
+header{
+    height: 40px;
+    width: 100%;
+    background-color: grey;
+    position:fixed;
+    top: 0px;
+}
+section{
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-color: aqua;
+}
+#new-recipe{
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    justify-content: center;
+    width: 400px;
+    padding: 50px;
+    
+}
+
+#new-ingredients{
+    margin: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.new-ingredient-descriptor{
+    margin-bottom: 25px;
+
+}
+
+
