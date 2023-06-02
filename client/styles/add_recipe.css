@@ -1,13 +1,21 @@
 
+h1 {
+    font-size: 45px;
+    margin-top: 20px;
+}
+
 h2{
     margin-bottom: 10px;
 }
+
+h3{
+    margin: 10px;
+}
 header{
-    height: 40px;
+    height: 50px;
     width: 100%;
     background-color: grey;
-    position:fixed;
-    top: 0px;
+    position: static;
 }
 
 nav{
@@ -16,12 +24,17 @@ nav{
 }
 nav > * {
     height: 100%;
-    width: 100px;
+    width: 150px;
+    margin-right: 20px;
+    background-color: rgb(255, 255, 255);
 }
 
 nav > * > a {
     text-decoration: none;
+    font-size: medium;
+    font-weight: 400;
     color: black;
+    border: none;
 }
 
 body{
@@ -50,7 +63,7 @@ section{
     width: 400px;
     padding: 50px;
     border: solid black 1px;
-    margin-top: 60px;
+    margin-top: 10px;
     box-shadow: 5px 5px 5px rgb(115, 115, 115);
     
 }
@@ -61,6 +74,9 @@ section{
     flex-direction: column;
 }
 
+#new-instructions{
+    margin: 5px;
+}
 
 .new-ingredient-name{
     margin: 2px;

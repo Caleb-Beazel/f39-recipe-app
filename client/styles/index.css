@@ -10,7 +10,7 @@ h3{
     margin: 10px;
 }
 header{
-    height: 40px;
+    height: 50px;
     width: 100%;
     background-color: grey;
     position: static;
@@ -22,12 +22,17 @@ nav{
 }
 nav > * {
     height: 100%;
-    width: 100px;
+    width: 150px;
+    margin-right: 20px;
+    background-color: rgb(255, 255, 255);
 }
 
 nav > * > a {
     text-decoration: none;
+    font-size: medium;
+    font-weight: 400;
     color: black;
+    border: none;
 }
 
 
